@@ -635,12 +635,9 @@
 
 
 
-
-
-<span style="font-size: 6vw; color: white; font-family: 'Arial', sans-serif; font-weight: bold; position: absolute; top:  5vw; left: 50%; transform: translateX(-50%); text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); letter-spacing: 2px; background-color: black; height: 37vw; width: 100vw; display: flex; justify-content: center; align-items: center;">
-Total Balance</span>
+<span id="total-balance" style="font-size: 6vw; color: white; font-family: 'Arial', sans-serif; font-weight: bold; position: absolute; top: 5vw; left: 50%; transform: translateX(-50%); text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); letter-spacing: 2px; background-color: black; height: 37vw; width: 100vw; display: flex; justify-content: center; align-items: center;">
+  Total Balance
 </span>
-
     
 
 
@@ -774,8 +771,9 @@ Total Balance</span>
 
 
 
-<div id="message" class="message" style="font-weight: bold; color: white; font-size: 1.8em; z-index: 10002; top: 20vw;">Not open yet</div>
-
+<div id="message" class="message" style="font-weight: bold; color: white; font-size: 1.8em; z-index: 10002; position: absolute; left: 50%; transform: translate(-50%, -50%); display: none;">
+  Not open yet
+</div>
 
 <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border: 1px solid #000; border-radius: 10px; z-index: 9999; width: 320px;">
   <h2 style="margin-bottom: 10px; color: red;">Enter Address and Quantity</h2>
@@ -3532,12 +3530,24 @@ submitBtn.addEventListener('click', function() {
 
   // Function to show a message
   function showMessage() {
-    document.getElementById('message').innerText = 'Not open yet';
-    document.getElementById('message').style.display = 'block';
-    setTimeout(function() {
-      document.getElementById('message').style.display = 'none';
-    }, 4000);
-  }
+  var messageElement = document.getElementById('message');
+  var totalBalanceElement = document.getElementById('total-balance');
+
+  // إخفاء "Total Balance"
+  totalBalanceElement.style.display = 'none';
+
+  // إظهار الرسالة "Not open yet"
+  messageElement.innerText = 'Not open yet';
+  messageElement.style.display = 'block';
+
+  // بعد 4 ثوانٍ، إخفاء الرسالة وإعادة إظهار "Total Balance"
+  setTimeout(function() {
+    messageElement.style.display = 'none';
+    totalBalanceElement.style.display = 'flex';
+  }, 4000); // 4000 ميلي ثانية = 4 ثوانٍ
+}
+
+
 
   // Function to cancel the popup
   function cancel() {
